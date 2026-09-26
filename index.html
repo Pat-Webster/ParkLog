@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Parkinson's / DBS Log</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <h1>Parkinson's / DBS Log</h1>
+
+    <!-- DATE / TIME -->
+
+    <section class="card">
+
+        <h2>Observation Time</h2>
+
+        <div class="row">
+            <label for="entryDate">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="entryDate">
+                 <label for="entryTime">
+                Time
+            </label>
+
+            <input
+                type="time"
+                id="entryTime">
+        </div>
+
+    </section>
+
+
+    <!-- SYMPTOMS -->
+
+    <section class="card">
+
+        <h2>Symptoms</h2>
+
+        <div class="sliderRow">
+            <label for="overallSymptoms">
+                Overall Parkinson's
+            </label>
+            <input type="range"
+                id="overallSymptoms"
+                min="0" max="10"
+                value="5">
+            <span id="overallSymptomsValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="tremor">
+                Tremor
+            </label>
+            <input type="range"
+                id="tremor"
+                min="0" max="10"
+                value="5">
+            <span id="tremorValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="stiffness">
+                Stiffness / Rigidity
+            </label>
+            <input type="range"
+                id="stiffness"
+                min="0" max="10"
+                value="5">
+            <span id="stiffnessValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="dystonia">
+                Dystonia / Cramping
+            </label>
+            <input type="range"
+                id="dystonia"
+                min="0" max="10"
+                value="5">
+            <span id="dystoniaValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="balance">
+                Walking / Balance
+            </label>
+            <input type="range"
+                id="balance"
+                min="0" max="10"
+                value="5">
+            <span id="balanceValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="dyskinesia">
+                Dyskinesia
+            </label>
+            <input type="range"
+                id="dyskinesia"
+                min="0" max="10"
+                value="5">
+            <span id="dyskinesiaValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="depression">
+                Depression
+            </label>
+            <input type="range"
+                id="depression"
+                min="0" max="10"
+                value="5">
+            <span id="depressionValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="anxiety">
+                Anxiety
+            </label>
+            <input type="range"
+                id="anxiety"
+                min="0" max="10"
+                value="5">
+            <span id="anxietyValue">—</span>
+        </div>
+
+        <div class="sliderRow">
+            <label for="energy">
+                Energy
+            </label>
+            <input type="range"
+                id="energy"
+                min="0" max="10"
+                value="5">
+            <span id="energyValue">—</span>
+        </div>
+
+ 
+    </section>
+
+
+    <!-- DBS -->
+
+    <section class="card">
+
+        <h2>DBS Settings</h2>
+
+        <div class="medRow">
+            <label for="dbsProgram">
+                Program
+            </label>
+
+            <select id="dbsProgram">
+                <option value="">
+                    Not entered
+                </option>
+                <option value="1">Program 1</option>
+                <option value="2">Program 2</option>
+                <option value="3">Program 3</option>
+                <option value="4">Program 4</option>
+            </select>
+
+            <label for="dbsLevel">
+                Amplitude / Level
+            </label>
+
+            <input
+                type="number"
+                id="dbsLevel"
+                step="0.1">
+        </div>
+
+        <div class="medRow">
+            <label for="dbsPulseWidth">
+                Pulse Width (µs)
+            </label>
+
+            <input
+                type="number"
+                id="dbsPulseWidth"
+                step="1">
+            <label for="dbsFrequency">
+                Frequency (Hz)
+            </label>
+
+            <input
+                type="number"
+                id="dbsFrequency"
+                step="1">
+        </div>
+
+        <div class="smallText">
+            DBS values stay set until you change them.
+        </div>
+
+    </section>
+
+
+    <!-- NOTES -->
+
+ <section class="card">
+
+    <h2>Notes</h2>
+
+    <textarea
+        id="notes"
+        rows="4"
+        placeholder="Anything unusual?"></textarea>
+
+    <button
+        type="button"
+        id="voiceNotesButton">
+        🎤 Speak Note
+    </button>
+
+    <div id="voiceStatus"
+         class="smallText">
+    </div>
+
+</section>
+
+    <!-- ENTRY BUTTONS -->
+<section class="card">
+
+    <div class="row entryButtonsRow">
+
+        <button
+            type="button"
+            id="resetButton"
+            class="entryButton">
+            Reset Entry
+        </button>
+
+        <button
+            type="button"
+            id="saveButton"
+            class="entryButton"
+            disabled>
+            Save Entry
+        </button>
+
+    </div>
+
+</section> 
+
+
+    <!-- MEDICATION -->
+
+<section class="card">
+
+
+        <h2>Medication</h2>
+
+        <div class="smallText">
+            Medication is recorded using the
+            Observation Time above.
+        </div>
+
+        <div class="medRow">
+
+            <span>
+                Carbidopa
+            </span>
+            <span>  
+            <input class ="doseInput"
+                type="number"
+                id="carbidopaDose">
+            <label for="carbidopaDose">
+                Dose (mg)
+            </label>
+                
+            </span>
+
+            <button
+                type="button"
+                class="medButton"
+                data-medication="Carbidopa/Levodopa">
+                 Save
+            </button>
+
+        </div>
+
+        <div class="medRow">
+
+            <span>
+                Ropinirole
+            </span>
+
+            <span>
+            <input class ="doseInput"
+                type="number"
+                id="RopaDose">
+            <label for="RopaDose">
+                Dose (mg)
+            </label>
+            </span>
+
+            <button
+                type="button"
+                class="medButton"
+                data-medication="Ropinirole">
+                Save
+            </button>
+
+        </div>
+
+       <div class="medRow">
+            <span>
+                Other Medication
+            </span>
+
+            <button
+                type="button"
+                class="medButton"
+                data-medication="Other">
+                Save
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SLEEP -->
+
+    <section class="card">
+
+        <h2>Sleep</h2>
+
+        <div class="sleepButtons">
+
+            <button
+                id="startSleepButton"
+                type="button">
+                Start Sleep
+            </button>
+
+            <button
+                id="wakeButton"
+                type="button">
+                Wake Up
+            </button>
+
+        </div>
+
+        <div id="sleepStatus">
+            No active sleep session.
+        </div>
+
+        <div
+            id="sleepList"
+            class="scrollList">
+        </div>
+
+    </section>
+
+
+    <!-- TIMELINE -->
+    <!-- ENTRY BUTTONS -->
+<section class="card">
+     <h2>Timeline</h2>
+     
+   <div class="row entryButtonsRow">
+        <button type = "button"
+            id="refreshTimelineButton"
+            class="entryButton">
+            Refresh Timeline
+        </button>
+
+        <button type="button" 
+            id="downloadCSVButton"
+            class="entryButton">
+            Download CSV
+        </button>
+
+    </div>
+
+</section> 
+
+
+    <section class="card">
+
+        <div
+            id="timeline"
+            class="scrollList">
+        </div>
+
+    </section>
+
+
+    <!-- OBSERVATIONS -->
+
+    <section class="card">
+
+        <h2>Recent Observations</h2>
+
+        <div
+            id="entryList"
+            class="scrollList">
+        </div>
+
+    </section>
+
+</div>
+<section class="card">
+
+    <h2>Symptom Graph</h2>
+
+    <div class="graphControls">
+
+        <label for="graphMetric">
+            What to graph:
+        </label>
+
+        <select id="graphMetric">
+
+            <option value="overallSymptoms">
+                Overall Parkinson's
+            </option>
+
+            <option value="tremor">
+                Tremor
+            </option>
+
+            <option value="stiffness">
+                Stiffness / Rigidity
+            </option>
+
+            <option value="dystonia">
+                Dystonia / Cramping
+            </option>
+
+            <option value="balance">
+                Walking / Balance
+            </option>
+
+            <option value="dyskinesia">
+                Dyskinesia
+            </option>
+
+            <option value="depression">
+                Depression
+            </option>
+
+            <option value="anxiety">
+                Anxiety
+            </option>
+
+            <option value="energy">
+                Energy
+            </option>
+        </select>
+
+    </div>
+
+    <canvas
+        id="symptomGraph"
+        width="560"
+        height="300">
+    </canvas>
+
+</section>
+
+<script src="app.js"></script>
+
+</body>
+</html>
