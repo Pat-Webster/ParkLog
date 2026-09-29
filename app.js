@@ -35,9 +35,8 @@ const entryList =
 const resetButton =
     document.getElementById("resetButton");
 
-
-    const downloadCSVButton =
-    document.getElementById("downloadCSVButton");
+const downLoadBackupButton =
+    document.getElementById("downLoadBackupButton");
 
 function setCurrentDateTime() {
 
@@ -69,7 +68,7 @@ function setCurrentDateTime() {
         `${hours}:${minutes}`;
 }
 
-    saveButton.disabled = true;
+saveButton.disabled = true;
 
 const symptomSliders = [
     "overallSymptoms",
@@ -92,7 +91,7 @@ symptomSliders.forEach(
         const slider =
             document.getElementById(id);
 
-   console.log(id, slider);
+        console.log(id, slider);
 
         const valueDisplay =
             document.getElementById(
@@ -293,7 +292,7 @@ function displayEntries() {
                 ${entry.weather.pressureHpa} hPa
             `;
         }
-div.innerHTML = `
+    div.innerHTML = `
 
     <strong>
         ${entry.date}
@@ -407,19 +406,6 @@ let weather = null;
             weather: weather
     };
 
-    entryDate.addEventListener(
-        "change",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-
-    entryTime.addEventListener(
-        "change",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
 
     const entries =
         getEntries();
@@ -443,6 +429,19 @@ let weather = null;
     setCurrentDateTime();
 }
 
+entryDate.addEventListener(
+    "change",
+    function () {
+        saveButton.disabled = false;
+    }
+);
+
+entryTime.addEventListener(
+    "change",
+    function () {
+        saveButton.disabled = false;
+    }
+);
 
 saveButton.addEventListener(
     "click",
@@ -1596,8 +1595,12 @@ function main() {
 main();
 
 function downloadCSV() {
+    downloadObservationsCSV();
+    downloadMedicationCSV()
+}
 
-    
+ function downloadObservationsCSV()
+ {   
     const entries = getEntries();
 
     if (entries.length === 0) {
@@ -1671,24 +1674,7 @@ const columns = [
     link.click();
 
     URL.revokeObjectURL(url);
-    downloadMedicationCSV()
 
-}
-
-const downloadMedicationCSVButton =
-    document.getElementById("downloadMedicationCSVButton");
-
-    function downloadMedicationCSV() {
-
-    const events =
-        getMedicationEvents();
-
-    if (events.length === 0) {
-        alert("There are no medication events to download.");
-        return;
-    }
-
-    console.log(events);
 }
 
 function downloadMedicationCSV() {
@@ -1761,3 +1747,40 @@ function downloadMedicationCSV() {
     URL.revokeObjectURL(url);
 }
 
+function downloadBackup() {
+
+    const backup = {
+        entries: getEntries(),
+        medications: getMedicationEvents()
+    };
+
+    const json =
+        JSON.stringify(
+            backup,
+            null,
+            2
+        );
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type: "application/json"
+            }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        "ParkLogBackup.json";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+}

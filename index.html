@@ -22,29 +22,6 @@
 
     <!-- DATE / TIME -->
 
-    <section class="card">
-
-        <h2>Observation Time</h2>
-
-        <div class="row">
-            <label for="entryDate">
-                Date
-            </label>
-
-            <input
-                type="date"
-                id="entryDate">
-                 <label for="entryTime">
-                Time
-            </label>
-
-            <input
-                type="time"
-                id="entryTime">
-        </div>
-
-    </section>
-
 
     <!-- SYMPTOMS -->
 
@@ -207,6 +184,29 @@
 
         <div class="smallText">
             DBS values stay set until you change them.
+        </div>
+
+    </section>
+
+    <section class="card">
+
+        <h2>Observation Time</h2>
+
+        <div class="row">
+            <label for="entryDate">
+                Date
+            </label>
+
+            <input
+                type="date"
+                id="entryDate">
+                 <label for="entryTime">
+                Time
+            </label>
+
+            <input
+                type="time"
+                id="entryTime">
         </div>
 
     </section>
@@ -387,6 +387,15 @@
             id="downloadCSVButton"
             class="entryButton">
             Download CSV
+        </button>
+
+    </div>
+     
+   <div class="row entryButtonsRow">
+        <button type = "button"
+            id="downLoadBackupButton"
+            class="entryButton">
+            Download Backup
         </button>
 
     </div>
