@@ -1784,3 +1784,19 @@ function downloadBackup() {
 
     URL.revokeObjectURL(url);
 }
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker
+        .register("./service-worker.js")
+        .then(function () {
+            console.log(
+                "ParkLog service worker registered"
+            );
+        })
+        .catch(function (error) {
+            console.error(
+                "Service worker registration failed:",
+                error
+            );
+        });
+}
