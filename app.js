@@ -401,9 +401,23 @@ let weather = null;
         energy:
             getRating("energy"),
 
+        dbsProgram:
+            dbsProgram.value,
+
+        dbsLevel:
+            dbsLevel.value,
+
+        dbsPulseWidth:
+            dbsPulseWidth.value,
+
+        dbsFrequency:
+            dbsFrequency.value,
+
         notes:
             notes.value.trim(),
-            weather: weather
+
+        weather:
+            weather
     };
 
 
@@ -868,48 +882,11 @@ function buildTimeline() {
                     "SYMPTOMS / DBS",
 
                 details:
-                    `Symptoms: ${entry.overallSymptoms}/10
-                     — DBS Program: ${entry.dbsProgram || "-"}
+                    `DBS A Program: ${entry.dbsProgram || "-"}
                      — Level: ${entry.dbsLevel || "-"}`
             });
         }
     );
-        
-    dbsProgram.addEventListener(
-        "change",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-
-    notes.addEventListener(
-        "input",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-
-    dbsLevel.addEventListener(
-        "input",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-    
-    dbsFrequency.addEventListener(
-        "input",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-
-    dbsPulseWidth.addEventListener(
-        "input",
-        function () {
-            saveButton.disabled = false;
-        }
-    );
-
 
     // --------------------------------
     // Medication
@@ -990,6 +967,42 @@ function buildTimeline() {
 
     displayTimeline(events);
 }
+        
+    dbsProgram.addEventListener(
+        "change",
+        function () {
+            saveButton.disabled = false;
+        }
+    );
+
+    notes.addEventListener(
+        "input",
+        function () {
+            saveButton.disabled = false;
+        }
+    );
+
+    dbsLevel.addEventListener(
+        "input",
+        function () {
+            saveButton.disabled = false;
+        }
+    );
+    
+    dbsFrequency.addEventListener(
+        "input",
+        function () {
+            saveButton.disabled = false;
+        }
+    );
+
+    dbsPulseWidth.addEventListener(
+        "input",
+        function () {
+            saveButton.disabled = false;
+        }
+    );
+
 
 
 function displayTimeline(events) {
@@ -1587,9 +1600,8 @@ function main() {
     drawSymptomGraph();                         
 
     displaySleep();
-
-
     buildTimeline();
+    restoreDBSSettings();
 }     
 
 main();
@@ -1799,4 +1811,36 @@ if ("serviceWorker" in navigator) {
                 error
             );
         });
+}
+function restoreDBSSettings() {
+
+    const entries =
+        getEntries();
+
+    for (
+        let i = entries.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const entry =
+            entries[i];
+
+        if (entry.dbsProgram != null) {
+
+            dbsProgram.value =
+                entry.dbsProgram;
+
+            dbsLevel.value =
+                entry.dbsLevel ?? "";
+
+            dbsFrequency.value =
+                entry.dbsFrequency ?? "";
+
+            dbsPulseWidth.value =
+                entry.dbsPulseWidth ?? "";
+
+            return;
+        }
+    }
 }
