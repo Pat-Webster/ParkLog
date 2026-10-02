@@ -14,9 +14,6 @@ const dbsProgram =
 const dbsLevel =
     document.getElementById("dbsLevel");
 
-const currentLevel =
-    document.getElementById("currentLevel");
-
 const dbsFrequency =
     document.getElementById("dbsFrequency");
     
@@ -308,13 +305,11 @@ function displayEntries() {
     DBS Program:
     ${entry.dbsProgram || "Not entered"}
 
-    <br>
-
     DBS Level:
     ${entry.dbsLevel || "Not entered"}
 
-    DBS Current:
-    ${entry.currentLevel || "Not entered"}
+    <br>
+
 
     DBS Frequency:
     ${entry.dbsFrequency || "Not entered"}
@@ -1633,7 +1628,11 @@ const columns = [
     { key: "dyskinesia",      label: "Dyskinesia" },
     { key: "depression",      label: "Depression" },
     { key: "anxiety",         label: "Anxiety" },
-    { key: "energy",          label: "Energy" }
+    { key: "energy",          label: "Energy" },
+    { key: "dbsProgram",      label: "dbsProgram" },
+    { key: "dbsLevel",        label: "dbsLevel" },
+    { key: "dbsFrequency",    label: "dbsFrequency" },
+    { key: "dbsPulseWidth",   label: "dbsPulseWidth" }
     ];
 
     const headers =
