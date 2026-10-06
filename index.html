@@ -120,6 +120,17 @@
         </div>
 
         <div class="sliderRow">
+            <label for="sleep">
+                Sleep
+            </label>
+            <input type="range"
+                id="sleep"
+                min="0" max="10"
+                value="5">
+            <span id="sleepValue">—</span>
+        </div>
+
+        <div class="sliderRow">
             <label for="energy">
                 Energy
             </label>
@@ -158,7 +169,7 @@
             <label for="dbsLevel">
                 Amplitude / Level
             </label>
-            <input
+            <input class = "doseInput"
                 type="number"
                 id="dbsLevel"
                 step="0.1">
@@ -169,7 +180,7 @@
                 Pulse Width (µs)
             </label>
 
-            <input
+            <input  class = "doseInput"
                 type="number"
                 id="dbsPulseWidth"
                 step="1">
@@ -280,10 +291,10 @@
             </span>
             <span>  
             <input class ="doseInput"
-                type="number"
+                type="text"
                 id="carbidopaDose">
             <label for="carbidopaDose">
-                Dose (mg)
+                (mg)
             </label>
                 
             </span>
@@ -308,7 +319,7 @@
                 type="number"
                 id="RopaDose">
             <label for="RopaDose">
-                Dose (mg)
+                (mg)
             </label>
             </span>
 
@@ -340,38 +351,7 @@
 
     <!-- SLEEP -->
 
-    <section class="card">
-
-        <h2>Sleep</h2>
-
-        <div class="sleepButtons">
-
-            <button
-                id="startSleepButton"
-                type="button">
-                Start Sleep
-            </button>
-
-            <button
-                id="wakeButton"
-                type="button">
-                Wake Up
-            </button>
-
-        </div>
-
-        <div id="sleepStatus">
-            No active sleep session.
-        </div>
-
-        <div
-            id="sleepList"
-            class="scrollList">
-        </div>
-
-    </section>
-
-
+ 
     <!-- TIMELINE -->
     <!-- ENTRY BUTTONS -->
 <section class="card">
@@ -392,15 +372,6 @@
 
     </div>
      
-   <div class="row entryButtonsRow">
-        <button type = "button"
-            id="downLoadBackupButton"
-            class="entryButton">
-            Download Backup
-        </button>
-
-    </div>
-
 </section> 
 
 
@@ -466,6 +437,10 @@
 
             <option value="depression">
                 Depression
+            </option>
+
+            <option value="sleep">
+                Sleep
             </option>
 
             <option value="anxiety">

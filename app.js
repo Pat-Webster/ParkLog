@@ -26,14 +26,20 @@ const notes =
 const saveButton =
     document.getElementById("saveButton");
 
+const voiceNotesButton =
+    document.getElementById("voiceNotesButton");
+
 const entryList =
     document.getElementById("entryList");
 
 const resetButton =
     document.getElementById("resetButton");
 
-const downLoadBackupButton =
-    document.getElementById("downLoadBackupButton");
+const carbidopaDose =
+    document.getElementById("carbidopaDose");
+
+const RopaDose =
+    document.getElementById("RopaDose");
 
 function setCurrentDateTime() {
 
@@ -76,6 +82,7 @@ const symptomSliders = [
     "dyskinesia",
     "depression",
     "anxiety",
+    "sleep",
     "energy",
  ];
 
@@ -255,6 +262,10 @@ function displayEntries() {
                 "Anxiety",
                 entry.anxiety
             );
+            addRating(
+                "Sleep",
+                entry.sleep
+            );
 
             addRating(
                 "Energy",
@@ -390,8 +401,12 @@ let weather = null;
         depression:
             getRating("depression"),
 
+
         anxiety:
             getRating("anxiety"),
+
+        sleep:
+            getRating("sleep"),
 
         energy:
             getRating("energy"),
@@ -457,10 +472,70 @@ saveButton.addEventListener(
     saveEntry
 );
 
+voiceNotesButton.addEventListener(
+    "click",
+    notesListener
+);
+
+function notesListener() {
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        alert(
+            "Speech recognition is not supported by this browser."
+        );
+        return;
+    }
+
+    const recognition =
+        new SpeechRecognition();
+
+    recognition.lang =
+        "en-US";
+
+    recognition.interimResults =
+        false;
+
+    recognition.continuous =
+        false;
+
+    recognition.onresult =
+        function (event) {
+
+            const spokenText =
+                event.results[0][0].transcript;
+
+            if (notes.value.trim() !== "") {
+                notes.value += " ";
+            }
+
+            notes.value +=
+                spokenText;
+
+            saveButton.disabled =
+                false;
+        };
+
+    recognition.onerror =
+        function (event) {
+
+            console.log(
+                "Speech recognition error:",
+                event.error
+            );
+        };
+
+    recognition.start();
+}
+
+
 function getMedicationEvents() {
 
     const saved =
-        localStorage.getItem(
+         localStorage.getItem(
             "parkinsonsMedicationEvents"
         );
 
@@ -542,302 +617,14 @@ document
 setCurrentDateTime();
 
 displayEntries();
-const startSleepButton =
-    document.getElementById("startSleepButton");
 
-const wakeButton =
-    document.getElementById("wakeButton");
 
-const sleepStatus =
-    document.getElementById("sleepStatus");
-
-const sleepList =
-    document.getElementById("sleepList");
-
-
-function getSleepSessions() {
-
-    const saved =
-        localStorage.getItem(
-            "parkinsonsSleepSessions"
-        );
-
-    if (!saved) {
-        return [];
-    }
-
-    return JSON.parse(saved);
-}
-
-
-function saveSleepSessions(
-    sessions
-) {
-
-    localStorage.setItem(
-        "parkinsonsSleepSessions",
-        JSON.stringify(sessions)
-    );
-}
-
-
-function getActiveSleepSession() {
-
-    const saved =
-        localStorage.getItem(
-            "parkinsonsActiveSleep"
-        );
-
-    if (!saved) {
-        return null;
-    }
-
-    return JSON.parse(saved);
-}
-
-
-function setActiveSleepSession(
-    session
-) {
-
-    localStorage.setItem(
-        "parkinsonsActiveSleep",
-        JSON.stringify(session)
-    );
-}
-
-
-function clearActiveSleepSession() {
-
-    localStorage.removeItem(
-        "parkinsonsActiveSleep"
-    );
-}
-
-
-function formatTime(date) {
-
-    return date.toLocaleTimeString(
-        [],
-        {
-            hour: "2-digit",
-            minute: "2-digit"
-        }
-    );
-}
-
-function formatDuration(
-    milliseconds
-) {
-
-    const totalMinutes =
-        Math.floor(
-            milliseconds / 60000
-        );
-
-    const hours =
-        Math.floor(
-            totalMinutes / 60
-        );
-
-    const minutes =
-        totalMinutes % 60;
-
-    return `${hours} hr ${minutes} min`;
-}
-
-
-function startSleep() {
-
-    const active =
-        getActiveSleepSession();
-
-    if (active) {
-
-        alert(
-            "A sleep session is already active."
-        );
-
-        return;
-    }
-
-
-    const now =
-        new Date();
-
-
-    const session = {
-
-        start:
-            now.toISOString()
-    };
-
-
-    setActiveSleepSession(
-        session
-    );
-
-
-    displaySleep();
-}
-
-
-function wakeUp() {
-
-    const active =
-        getActiveSleepSession();
-
-
-    if (!active) {
-
-        alert(
-            "There is no active sleep session."
-        );
-
-        return;
-    }
-
-
-    const now =
-        new Date();
-
-
-    const session = {
-
-        start:
-            active.start,
-
-        end:
-            now.toISOString()
-    };
-
-
-    const sessions =
-        getSleepSessions();
-
-
-    sessions.push(
-        session
-    );
-
-
-    saveSleepSessions(
-        sessions
-    );
-
-
-    clearActiveSleepSession();
-
-
-    displaySleep();
-}
-
-
-function displaySleep() {
-
-    const active =
-        getActiveSleepSession();
-
-
-    if (active) {
-
-        const start =
-            new Date(
-                active.start
-            );
-
-        sleepStatus.textContent =
-            `Sleeping since ${formatTime(start)}`;
-    }
-    else {
-
-        sleepStatus.textContent =
-            "No active sleep session.";
-    }
-
-
-    const sessions =
-        getSleepSessions();
-
-
-    sleepList.innerHTML = "";
-
-
-    const newestFirst =
-        [...sessions].reverse();
-
-
-    newestFirst.forEach(
-        function (session) {
-
-            const start =
-                new Date(
-                    session.start
-                );
-
-            const end =
-                new Date(
-                    session.end
-                );
-
-            const duration =
-                end - start;
-
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "sleepEntry";
-
-
-            div.innerHTML = `
-                <strong>
-                    ${start.toLocaleDateString()}
-                </strong>
-
-                <br>
-
-                ${formatTime(start)}
-                →
-                ${formatTime(end)}
-
-                <br>
-
-                Duration:
-                ${formatDuration(duration)}
-            `;
-
-
-            sleepList.appendChild(
-                div
-            );
-        }
-    );
-}
-
-
-startSleepButton.addEventListener(
-    "click",
-    startSleep
-);
-
-
-wakeButton.addEventListener(
-    "click",
-    wakeUp
-);
 
 downloadCSVButton.addEventListener(
     "click",
     downloadCSV
 );
 
-
-displaySleep();
 
 const timeline =
     document.getElementById("timeline");
@@ -910,42 +697,7 @@ function buildTimeline() {
     );
 
 
-    // --------------------------------
-    // Sleep
-    // --------------------------------
-
-    const sleepSessions =
-        getSleepSessions();
-
-    sleepSessions.forEach(
-        function (sleep) {
-
-            const start =
-                new Date(
-                    sleep.start
-                );
-
-            const end =
-                new Date(
-                    sleep.end
-                );
-
-            events.push({
-
-                timestamp:
-                    start,
-
-                type:
-                    "SLEEP",
-
-                details:
-                    `${formatTime(start)}
-                     → ${formatTime(end)}
-                     (${formatDuration(end - start)})`
-            });
-        }
-    );
-
+ 
 
     // Newest event first
 
@@ -1594,7 +1346,6 @@ function main() {
 
     drawSymptomGraph();                         
 
-    displaySleep();
     buildTimeline();
     restoreDBSSettings();
 }     
@@ -1628,6 +1379,7 @@ const columns = [
     { key: "dyskinesia",      label: "Dyskinesia" },
     { key: "depression",      label: "Depression" },
     { key: "anxiety",         label: "Anxiety" },
+    { key: "sleep",           label: "Sleep" },
     { key: "energy",          label: "Energy" },
     { key: "dbsProgram",      label: "dbsProgram" },
     { key: "dbsLevel",        label: "dbsLevel" },
