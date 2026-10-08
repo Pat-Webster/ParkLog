@@ -7,7 +7,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Parkinson's / DBS Log  V1.0</title>
+    <title>Parkinson's / DBS Log  V1.02</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
 
 <div class="app">
 
-    <h1>Parkinson's / DBS Log v1</h1>
+    <h1>Parkinson's / DBS Log v1.02</h1>
 
     <!-- DATE / TIME -->
 
@@ -147,7 +147,7 @@
    <!-- ENTRY BUTTONS -->
 <section class="card">
 
-    <div class="row entryButtonsRow">
+    <div class="row">
 
         <button
             type="button"
@@ -298,7 +298,8 @@
             <button
                 type="button"
                 class="medButton"
-                data-medication="Carbidopa/Levodopa">
+                data-medication="Carbidopa/Levodopa"
+                data-dose-input="carbidopaDose">
                  Save
             </button>
 
@@ -322,7 +323,8 @@
             <button
                 type="button"
                 class="medButton"
-                data-medication="Ropinirole">
+                data-medication="Ropinirole"
+                data-dose-input="RopaDose">
                 Save
             </button>
 
@@ -353,7 +355,7 @@
 <section class="card">
      <h2>Timeline</h2>
      
-   <div class="row entryButtonsRow">
+   <div class="row">
         <button type = "button"
             id="refreshTimelineButton"
             class="entryButton">

@@ -49,17 +49,13 @@ h2 {
         rgba(0, 0, 0, 0.08);
 }
 
-
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 15px;
+.row .entryButton {
+    width: auto;
+    flex: 1;
+    padding: 8px 12px;
+    margin-bottom: 0;
+    font-size: 0.95rem;
 }
-
 
 .row label {
     flex: 1;

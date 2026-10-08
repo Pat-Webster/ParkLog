@@ -626,7 +626,7 @@ document
 
                     const medication =
                         button.dataset.medication;
-                        dose = carbidopaDose.value;
+                    const dose = document.getElementById(button.dataset.doseInput).value;  
                     saveMedicationEvent(
                         medication,
                         dose
