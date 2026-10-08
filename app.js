@@ -11,6 +11,7 @@ const overallSymptomsValue =
 const dbsProgram =
     document.getElementById("dbsProgram");
 
+
 const dbsLevel =
     document.getElementById("dbsLevel");
 
@@ -155,6 +156,7 @@ function saveEntries(entries) {
         JSON.stringify(entries)
     );
 }
+
 function resetSymptomSliders() {
 
     ratedSymptoms.clear();
@@ -328,6 +330,15 @@ function displayEntries() {
    DBS dbsPulseWidth:
     ${entry.dbsPulseWidth || "Not entered"}
 
+    Carbidopa Dose:
+    ${entry.carbidopaDose  || "Not entered"}
+
+    Ropa Dose:
+    ${entry.RopaDose || "Not entered"}  
+
+   DBS dbsPulseWidth:
+    ${entry.dbsPulseWidth || "Not entered"}
+
     ${weatherText}
 
     ${
@@ -339,13 +350,14 @@ function displayEntries() {
 
             entryList.appendChild(div);
         }
+        
     );
 }
 
 
 async function saveEntry() {
-        alert("Saving Entry");
-let weather = null;
+    alert("Saving Entry");
+    let weather = null;
 
     try {
 
@@ -422,6 +434,11 @@ let weather = null;
 
         dbsFrequency:
             dbsFrequency.value,
+
+        carbidopaDose:
+            carbidopaDose.value,
+        RopaDose:
+            RopaDose.value,
 
         notes:
             notes.value.trim(),
@@ -548,7 +565,8 @@ function getMedicationEvents() {
 
 
 function saveMedicationEvent(
-    medication
+    medication,
+    dose
 ) {
 
     const now =
@@ -557,6 +575,9 @@ function saveMedicationEvent(
     const event = {
         medication:
             medication,
+
+        dose:
+            dose,
 
         timestamp:
             now.toISOString(),
@@ -605,9 +626,10 @@ document
 
                     const medication =
                         button.dataset.medication;
-
+                        dose = carbidopaDose.value;
                     saveMedicationEvent(
-                        medication
+                        medication,
+                        dose
                     );
                 }
             );
@@ -691,7 +713,7 @@ function buildTimeline() {
                     "MEDICATION",
 
                 details:
-                    med.medication
+                    `${med.medication} — ${med.dose} mg`
             });
         }
     );
@@ -1348,6 +1370,7 @@ function main() {
 
     buildTimeline();
     restoreDBSSettings();
+    restoreDosage();
 }     
 
 main();
@@ -1563,6 +1586,7 @@ if ("serviceWorker" in navigator) {
             );
         });
 }
+
 function restoreDBSSettings() {
 
     const entries =
@@ -1590,6 +1614,33 @@ function restoreDBSSettings() {
 
             dbsPulseWidth.value =
                 entry.dbsPulseWidth ?? "";
+
+            return;
+        }
+    }
+}
+
+function restoreDosage() {
+
+    const entries =
+        getEntries();
+
+    for (
+        let i = entries.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        const entry =
+            entries[i];
+
+        if (entry.carbidopaDose != null) {
+
+            carbidopaDose.value =
+                entry.carbidopaDose ?? "";
+
+            RopaDose.value =
+                entry.RopaDose ?? "";
 
             return;
         }
