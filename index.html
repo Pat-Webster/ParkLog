@@ -7,7 +7,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Parkinson's / DBS Log  V1.03</title>
+    <title>Parkinson's / DBS Log  V1.04</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
 
 <div class="app">
 
-    <h1>Parkinson's / DBS Log v1.03</h1>
+    <h1>Parkinson's / DBS Log v1.04</h1>
 
     <!-- DATE / TIME -->
 
@@ -335,10 +335,20 @@
                 Other Medication
             </span>
 
+            <span>
+            <input class ="doseInput"
+                type="number"
+                id="OtherDose">
+            <label for="OtherDose">
+                (mg)
+            </label>
+            </span>
+
             <button
                 type="button"
                 class="medButton"
-                data-medication="Other">
+                data-medication="Other"
+                data-dose-input="OtherDose">
                 Save
             </button>
 
