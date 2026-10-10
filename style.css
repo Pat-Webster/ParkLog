@@ -64,10 +64,17 @@ h2 {
 
 
 .row input,
-.row select,
+.row select
+    width: 150px;
+
+    font-size: 1rem;
+
+    padding: 8px;
+}
+
 .row input[type="date"],
 .row input[type="time"] {
-    width: 150px;
+    width: 120px;
 
     font-size: 1rem;
 
