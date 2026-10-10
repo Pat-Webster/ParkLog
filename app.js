@@ -2,12 +2,6 @@ console.log("THIS IS THE PARKLOG APP.JS");
 const entryDate = document.getElementById("entryDate");
 const entryTime = document.getElementById("entryTime");
 
-const overallSymptoms =
-    document.getElementById("overallSymptoms");
-
-const overallSymptomsValue =
-    document.getElementById("overallSymptomsValue");
-
 const dbsProgram =
     document.getElementById("dbsProgram");
 
@@ -75,14 +69,12 @@ function setCurrentDateTime() {
 saveButton.disabled = true;
 
 const symptomSliders = [
-    "overallSymptoms",
     "tremor",
     "stiffness",
     "dystonia",
     "balance",
     "dyskinesia",
     "depression",
-    "anxiety",
     "sleep",
     "energy",
  ];
@@ -224,12 +216,6 @@ function displayEntries() {
                 }
             }
 
-
-            addRating(
-                "Overall",
-                entry.overallSymptoms
-            );
-
             addRating(
                 "Tremor",
                 entry.tremor
@@ -251,7 +237,7 @@ function displayEntries() {
             );
 
             addRating(
-                "Dystonia / Cramping",
+                "Dystonia",
                 entry.dystonia
             );
 
@@ -260,10 +246,6 @@ function displayEntries() {
                 entry.depression
             );
 
-            addRating(
-                "Anxiety",
-                entry.anxiety
-            );
             addRating(
                 "Sleep",
                 entry.sleep
@@ -392,9 +374,6 @@ async function saveEntry() {
         enteredAt:
             new Date().toISOString(),
 
-        overallSymptoms:
-            getRating("overallSymptoms"),
-
         tremor:
             getRating("tremor"),
 
@@ -412,10 +391,6 @@ async function saveEntry() {
 
         depression:
             getRating("depression"),
-
-
-        anxiety:
-            getRating("anxiety"),
 
         sleep:
             getRating("sleep"),
@@ -1394,14 +1369,12 @@ const columns = [
     { key: "date",            label: "Date" },
     { key: "time",            label: "Time" },
     { key: "enteredAt",       label: "Entered At" },
-    { key: "overallSymptoms", label: "Overall Parkinson's" },
-    { key: "tremor",          label: "Tremor" },
-    { key: "stiffness",       label: "Stiffness / Rigidity" },
-    { key: "dystonia",        label: "Dystonia / Cramping" },
-    { key: "balance",         label: "Walking / Balance" },
+     { key: "tremor",          label: "Tremor" },
+    { key: "stiffness",       label: "Rigidity" },
+    { key: "dystonia",        label: "Dystonia" },
+    { key: "balance",         label: "Balance" },
     { key: "dyskinesia",      label: "Dyskinesia" },
     { key: "depression",      label: "Depression" },
-    { key: "anxiety",         label: "Anxiety" },
     { key: "sleep",           label: "Sleep" },
     { key: "energy",          label: "Energy" },
     { key: "dbsProgram",      label: "dbsProgram" },

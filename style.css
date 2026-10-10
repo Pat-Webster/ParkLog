@@ -64,7 +64,9 @@ h2 {
 
 
 .row input,
-.row select {
+.row select,
+.row input[type="date"],
+.row input[type="time"] {
     width: 150px;
 
     font-size: 1rem;

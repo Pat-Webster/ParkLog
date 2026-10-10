@@ -7,7 +7,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Parkinson's / DBS Log  V1.04</title>
+    <title>Parkinson's / DBS Log  V1.03</title>
 
     <link
         rel="stylesheet"
@@ -20,7 +20,7 @@
 
 <div class="app">
 
-    <h1>Parkinson's / DBS Log v1.04</h1>
+    <h1>Parkinson's / DBS Log v1.03</h1>
 
     <!-- DATE / TIME -->
 
@@ -30,17 +30,6 @@
     <section class="card">
 
         <h2>Symptoms</h2>
-
-        <div class="sliderRow">
-            <label for="overallSymptoms">
-                Overall Parkinson's
-            </label>
-            <input type="range"
-                id="overallSymptoms"
-                min="0" max="10"
-                value="5">
-            <span id="overallSymptomsValue">—</span>
-        </div>
 
         <div class="sliderRow">
             <label for="tremor">
@@ -55,7 +44,7 @@
 
         <div class="sliderRow">
             <label for="stiffness">
-                Stiffness / Rigidity
+                Rigidity
             </label>
             <input type="range"
                 id="stiffness"
@@ -66,7 +55,7 @@
 
         <div class="sliderRow">
             <label for="dystonia">
-                Dystonia / Cramping
+                Dystonia
             </label>
             <input type="range"
                 id="dystonia"
@@ -77,7 +66,7 @@
 
         <div class="sliderRow">
             <label for="balance">
-                Walking / Balance
+               Balance
             </label>
             <input type="range"
                 id="balance"
@@ -106,17 +95,6 @@
                 min="0" max="10"
                 value="5">
             <span id="depressionValue">—</span>
-        </div>
-
-        <div class="sliderRow">
-            <label for="anxiety">
-                Anxiety
-            </label>
-            <input type="range"
-                id="anxiety"
-                min="0" max="10"
-                value="5">
-            <span id="anxietyValue">—</span>
         </div>
 
         <div class="sliderRow">
@@ -339,7 +317,7 @@
             <input class ="doseInput"
                 type="number"
                 id="OtherDose">
-            <label for="OtherDose">
+            <label for="MedDose">
                 (mg)
             </label>
             </span>
@@ -419,11 +397,7 @@
 
         <select id="graphMetric">
 
-            <option value="overallSymptoms">
-                Overall Parkinson's
-            </option>
-
-            <option value="tremor">
+             <option value="tremor">
                 Tremor
             </option>
 
@@ -449,10 +423,6 @@
 
             <option value="sleep">
                 Sleep
-            </option>
-
-            <option value="anxiety">
-                Anxiety
             </option>
 
             <option value="energy">
